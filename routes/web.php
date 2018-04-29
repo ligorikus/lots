@@ -11,6 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => ['jwt.auth']], function (){
+    Route::get('/', 'LotsController@index');
+    Route::get('/user/{user}/lots', 'LotsController@lots');
 });
