@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\LotRepository;
+use App\Repositories\LotRepositoryEloquent;
 use App\Repositories\UserRepository;
 use App\Repositories\UserRepositoryEloquent;
 use Illuminate\Support\ServiceProvider;
@@ -26,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(UserRepository::class, UserRepositoryEloquent::class);
+        $this->app->bind(LotRepository::class, LotRepositoryEloquent::class);
     }
 }
