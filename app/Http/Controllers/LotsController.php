@@ -22,6 +22,7 @@ class LotsController extends Controller
     /**
      * LotsController constructor.
      * @param UserRepository $userRepository
+     * @param LotRepository $lotRepository
      */
     public function __construct(UserRepository $userRepository, LotRepository $lotRepository)
     {
@@ -64,6 +65,10 @@ class LotsController extends Controller
         ]);
         $data['status'] = 0;
 
-        return auth()->user()->lots()->create($data);
+        $lot = auth()->user()->lots()->create($data);
+        $lot->price()->create([
+            'price' => $data['start_price']
+        ]);
+        return $lot;
     }
 }

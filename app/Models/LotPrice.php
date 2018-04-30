@@ -4,16 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Bet extends Model
+class LotPrice extends Model
 {
     protected $guarded = ['id'];
     protected $fillable = [
         'lot_id',
-        'better_id',
-        'sum'
+        'price'
     ];
 
-    public function bets()
+    public function lot()
     {
         return $this->belongsTo(Lot::class);
     }

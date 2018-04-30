@@ -28,4 +28,9 @@ class Lot extends Model
     {
         return $this->hasMany(Bet::class);
     }
+
+    public function price()
+    {
+        return $this->hasOne( LotPrice::class)->first();
+    }
 }
