@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LotRequest;
 use App\Models\Lot;
 use App\Models\User;
 use App\Repositories\UserRepository;
-use Illuminate\Http\Request;
-use Tymon\JWTAuth\JWTAuth;
 
 class LotsController extends Controller
 {
@@ -24,13 +23,41 @@ class LotsController extends Controller
         $this->userRepository = $userRepository;
     }
 
-    public function index()
+    public function all()
     {
-        return Lot::all();
+        return Lot::with('user')->get();
     }
 
-    public function lots(User $user)
+    public function index(User $user = null)
     {
+        if($user == null)
+        {
+            $user = auth()->user();
+        }
+
         return $this->userRepository->getLots($user->id);
+    }
+
+    public function show(Lot $lot)
+    {
+        return $lot;
+    }
+
+    /**
+     * @param LotRequest $request
+     * @return mixed
+     */
+    public function store(LotRequest $request)
+    {
+        $data = $request->only([
+            'title',
+            'description',
+            'start_price',
+            'step',
+            'blitz'
+        ]);
+        $data['status'] = 0;
+
+        return auth()->user()->lots()->create($data);
     }
 }

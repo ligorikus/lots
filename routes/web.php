@@ -12,6 +12,7 @@
 */
 
 Route::group(['middleware' => ['jwt.auth']], function (){
-    Route::get('/', 'LotsController@index');
-    Route::get('/user/{user}/lots', 'LotsController@lots');
+    Route::get('/', 'LotsController@all');
+    Route::get('user/{user}/lots', 'LotsController@list');
+    Route::resource('lots', 'LotsController');
 });

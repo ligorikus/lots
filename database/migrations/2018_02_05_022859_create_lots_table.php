@@ -20,7 +20,7 @@ class CreateLotsTable extends Migration
             $table->text('description');
             $table->integer('start_price');
             $table->integer('step');
-            $table->integer('blitz');
+            $table->integer('blitz')->nullable();
             $table->smallInteger('status');
             $table->timestamps();
         });
