@@ -2,6 +2,9 @@
 
 namespace App\Http\Requests;
 
+/**
+ * @property integer sum
+ */
 class BetRequest extends Request
 {
     /**
