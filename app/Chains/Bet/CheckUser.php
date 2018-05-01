@@ -35,7 +35,7 @@ class CheckUser extends BaseHandler implements Handler
 
         if ($currentUser)
         {
-            $message = $this->message = response()->json([
+            $this->message = $this->message = response()->json([
                 'status' => 'failed',
                 'message' => 'You already bet this lot'
             ]);
