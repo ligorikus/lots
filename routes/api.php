@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,7 +13,16 @@ use Illuminate\Http\Request;
 
 Route::post('register', 'Auth\RegisterController@create');
 
-Route::get('login', 'AuthController@login');
-Route::post('logout', 'AuthController@logout');
-Route::post('refresh', 'AuthController@refresh');
-Route::post('me', 'AuthController@me');
+Route::post('login', 'Backend\AuthController@login');
+Route::post('logout', 'Backend\AuthController@logout');
+Route::post('refresh', 'Backend\AuthController@refresh');
+Route::post('me', 'Backend\AuthController@me');
+
+Route::group(['middleware' => ['jwt.auth']], function (){
+    /* Lots */
+    Route::resource('lots', 'Backend\LotsController');
+    Route::get('/', 'Backend\LotsController@all');
+    Route::get('user/{user}/lots', 'Backend\LotsController@list');
+    /* Bets */
+    Route::get('/lots/{lot}/bet', 'Backend\BetsController@bet');
+});

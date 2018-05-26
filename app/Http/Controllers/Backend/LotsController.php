@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\LotRequest;
 use App\Models\Lot;
 use App\Models\User;
@@ -30,12 +31,12 @@ class LotsController extends Controller
         $this->lotRepository = $lotRepository;
     }
 
-    public function all()
+    public function index()
     {
         return $this->lotRepository->all();
     }
 
-    public function index(User $user = null)
+    public function list(User $user = null)
     {
         if($user == null)
         {
