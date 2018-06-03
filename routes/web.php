@@ -12,3 +12,6 @@
 */
 
 Route::get('/', 'Frontend\LotsController@index');
+
+Route::get('signin', 'Frontend\AuthController@signin');
+Route::get('signup', 'Frontend\AuthController@signup');

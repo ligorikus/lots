@@ -8,12 +8,15 @@
     <title>@yield('title')</title>
 
     <script src="js/app.js">
-
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <link rel="stylesheet" href="css/app.css">
     @yield('script')
 </head>
 <body>
-    @yield('content')
+    <div class="container">
+        @yield('header')
+        @yield('content')
+    </div>
 </body>
 </html>
