@@ -11,4 +11,14 @@ class LotsController extends Controller
     {
         return view('lots.index');
     }
+
+    public function create()
+    {
+        return view('lots.create');
+    }
+
+    public function edit()
+    {
+
+    }
 }

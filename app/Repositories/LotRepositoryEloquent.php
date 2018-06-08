@@ -25,7 +25,7 @@ class LotRepositoryEloquent implements LotRepository
      */
     public function all()
     {
-        return $this->lot->with('user')->get();
+        return $this->lot->with(['user', 'price'])->get();
     }
 
     /**
@@ -60,7 +60,7 @@ class LotRepositoryEloquent implements LotRepository
      */
     public function getPrice()
     {
-        return $this->lot->price()->price;
+        return $this->lot->price()->first()->price;
     }
 
     /**

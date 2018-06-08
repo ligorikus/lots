@@ -48,4 +48,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Lot::class, 'owner_id');
     }
+
+    public function role()
+    {
+        return $this->hasOne(RoleUser::class, 'user_id');
+    }
 }

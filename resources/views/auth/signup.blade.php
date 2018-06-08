@@ -40,6 +40,7 @@
                     data: $('#signupform').serialize(),
                     success: function(result){
                         console.log(result);
+                        window.location.href = "/signin";
                     }
                 });
             });

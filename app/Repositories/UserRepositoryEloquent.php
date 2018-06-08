@@ -31,6 +31,6 @@ class UserRepositoryEloquent implements UserRepository
 
     public function getLots($user_id)
     {
-        return $this->find($user_id)->lots()->get();
+        return $this->find($user_id)->lots()->with(['user', 'price'])->get();
     }
 }

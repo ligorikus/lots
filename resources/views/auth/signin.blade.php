@@ -40,6 +40,7 @@
                     data: $('#loginform').serialize(),
                     success: function(result){
                         localStorage.setItem('token', result.access_token);
+                        window.location.href = "/";
                     }
                 });
             });

@@ -31,6 +31,6 @@ class Lot extends Model
 
     public function price()
     {
-        return $this->hasOne( LotPrice::class)->first();
+        return $this->hasOne(LotPrice::class);
     }
 }

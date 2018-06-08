@@ -16,4 +16,9 @@ class AuthController extends Controller
     {
         return view('auth.signup');
     }
+
+    public function logout()
+    {
+        return view('auth.logout');
+    }
 }

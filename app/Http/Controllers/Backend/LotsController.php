@@ -31,18 +31,14 @@ class LotsController extends Controller
         $this->lotRepository = $lotRepository;
     }
 
-    public function index()
+    public function all()
     {
         return $this->lotRepository->all();
     }
 
-    public function list(User $user = null)
+    public function index()
     {
-        if($user == null)
-        {
-            $user = auth()->user();
-        }
-
+        $user = auth()->user();
         return $this->userRepository->getLots($user->id);
     }
 

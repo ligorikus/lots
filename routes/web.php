@@ -13,5 +13,9 @@
 
 Route::get('/', 'Frontend\LotsController@index');
 
+Route::resource('lots', 'Frontend\LotsController');
+
+
 Route::get('signin', 'Frontend\AuthController@signin');
 Route::get('signup', 'Frontend\AuthController@signup');
+Route::get('logout', 'Frontend\AuthController@logout');

@@ -7,14 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
 
-    <script src="js/app.js">
+    <script src="{{ asset("js/app.js") }}">
     </script>
 
-    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="{{ asset("css/app.css") }}">
     @yield('script')
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="app">
         @yield('header')
         @yield('content')
     </div>
