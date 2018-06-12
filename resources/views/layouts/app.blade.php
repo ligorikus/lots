@@ -14,8 +14,20 @@
     @yield('script')
 </head>
 <body>
-    <div class="container" id="app">
-        @yield('header')
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-2" style="font-size: 2em;"><a href="/"><i>Auctions</i></a></div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <h4><span id="auth"></span></h4>
+                </div>
+                <div class="col-md-2">
+                    <h6><span id="logout"></span></h6>
+                </div>
+            </div>
+        </div>
+        <hr>
         @yield('content')
     </div>
 </body>

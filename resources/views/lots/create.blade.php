@@ -40,7 +40,7 @@
                     data: $('#lotsform').serialize()
                 })
                     .done(function () {
-
+                        window.location.href = "/";
                     })
                     .fail(function(request){
                         errors = request.responseJSON.errors;

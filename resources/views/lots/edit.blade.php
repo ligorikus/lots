@@ -25,14 +25,17 @@
     <script>
         $(document).ready(function(){
             $.ajax({
-                //TODO: url id
-                url: '/api/lots/',
+                url: '/api/lots/'+{{$lot->id}},
                 headers: {
                     "Authorization": "Bearer "+localStorage.getItem('token')
                 },
             })
-                .done(function (result) {
-
+                .done(function (response) {
+                    $("input[name=title]").val(response.title);
+                    $("input[name=description]").val(response.description);
+                    $("input[name=start_price]").val(response.start_price);
+                    $("input[name=step]").val(response.step);
+                    $("input[name=blitz]").val(response.blitz);
                 });
 
             $('#lotsform').on('submit', function(e){
@@ -43,15 +46,16 @@
                 $("#step").text("");
                 $("#blitz").text("");
                 $.ajax({
-                    type: 'POST',
-                    url: '/api/lots/',
+                    type: 'PUT',
+                    dataType: 'json',
+                    url: '/api/lots/'+{{$lot->id}},
                     headers: {
                         "Authorization": "Bearer "+localStorage.getItem('token')
                     },
                     data: $('#lotsform').serialize()
                 })
-                    .done(function () {
-
+                    .done(function (response) {
+                        window.location.href = "/";
                     })
                     .fail(function(request){
                         errors = request.responseJSON.errors;

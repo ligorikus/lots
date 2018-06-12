@@ -13,7 +13,10 @@
 
 Route::get('/', 'Frontend\LotsController@index');
 
+Route::get('/', 'Frontend\LotsController@all');
 Route::resource('lots', 'Frontend\LotsController');
+
+Route::get('/user/{user}', 'Frontend\UserController@index');
 
 
 Route::get('signin', 'Frontend\AuthController@signin');

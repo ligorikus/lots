@@ -20,11 +20,12 @@ Route::post('me', 'Backend\AuthController@me');
 
 Route::group(['middleware' => ['jwt.auth']], function (){
     Route::get('auth', function () {
-        return response()->json(['success' => true]);
+        return response()->json(auth()->user());
     });
     /* Lots */
     Route::get('/', 'Backend\LotsController@all');
-    Route::get('user/{user}/lots', 'Backend\LotsController@list');
+    Route::get('/user/{user}', 'Backend\UserController@index');
+    Route::get('user/{user}/lots', 'Backend\LotsController@lots');
     Route::resource('lots', 'Backend\LotsController');
     /* Bets */
     Route::get('/lots/{lot}/bet', 'Backend\BetsController@bet');

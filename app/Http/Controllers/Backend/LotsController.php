@@ -42,9 +42,14 @@ class LotsController extends Controller
         return $this->userRepository->getLots($user->id);
     }
 
+    public function lots(User $user)
+    {
+        return $this->userRepository->getLots($user->id);
+    }
+
     public function show(Lot $lot)
     {
-        return $lot;
+        return $lot->with(['user','price'])->find($lot->id);
     }
 
     /**
@@ -67,5 +72,23 @@ class LotsController extends Controller
             'price' => $data['start_price']
         ]);
         return $lot;
+    }
+
+    public function update(Lot $lot, LotRequest $request)
+    {
+        if (auth()->user()->cannot('update', $lot)) {
+            return response()->json(['success'=>false],403);
+        }
+        $data = $request->only([
+            'title',
+            'description',
+            'start_price',
+            'step',
+            'blitz'
+        ]);
+
+        $lot->update($data);
+
+        return response()->json(['success'=>true]);
     }
 }
