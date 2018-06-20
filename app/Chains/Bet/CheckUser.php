@@ -38,7 +38,7 @@ class CheckUser extends BaseHandler implements Handler
             $this->message = $this->message = response()->json([
                 'status' => 'failed',
                 'message' => 'You already bet this lot'
-            ]);
+            ], 403);
             return false;
         }
 

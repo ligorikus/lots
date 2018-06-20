@@ -29,7 +29,7 @@ class CheckSum extends BaseHandler implements Handler
             $this->message = response()->json([
                 'status' => 'failed',
                 'message' => 'Sum of bet less than current lots price'
-            ]);
+            ], 403);
             return false;
         }
 

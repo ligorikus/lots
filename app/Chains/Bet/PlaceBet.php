@@ -19,13 +19,12 @@ class PlaceBet extends BaseHandler implements Handler
     function handle()
     {
         $price = $this->request->lot->getLot()->price();
-        $price->price = $this->request->sum;
-        $price->update();
+        $price->update(['price' => $this->request->sum]);
 
         $this->message = $this->request->lot->getLot()->bets()->create([
             'sum' => $this->request->sum,
             'better_id' => $this->request->user->id
-        ]);
+        ], 200);
 
         return true;
     }

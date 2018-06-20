@@ -93,7 +93,6 @@ class LotsController extends Controller
         return response()->json(['success'=>true]);
     }
 
-
     public function search(Request $request)
     {
         return $this->lotRepository->getLot()->search($request->search)->get()->load('price', 'user');
