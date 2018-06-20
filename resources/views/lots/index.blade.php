@@ -36,46 +36,46 @@
 @section('script')
     @include('auth.auth')
     <script>
-        function getLot(id, user, title, price, step, blitz, status)
-        {
-            return "<tr>" +
+        $(document).ready(function(){
+            function getLot(id, user, title, price, step, blitz, status)
+            {
+                return "<tr>" +
                     "<td>" + id + "</td>" +
                     "<td>" + title + "</td>" +
                     "<td>" +
-                        "<a href='/user/"+user.id+"'>"+user.email+"</a>" +
+                    "<a href='/user/"+user.id+"'>"+user.email+"</a>" +
                     "</td>" +
                     "<td>" + price + "</td>" +
                     "<td>" + step + "</td>" +
                     "<td>" + blitz + "</td>" +
                     "<td>" + status + "</td>" +
                     "<td>" +
-                        "<a href='/lots/"+id+"'> <span class='glyphicon glyphicon-eye-open'></span> </a>" +
+                    "<a href='/lots/"+id+"'> <span class='glyphicon glyphicon-eye-open'></span> </a>" +
                     "</td>" +
-                   "</tr>"
-        }
-
-        $.ajax({
-            dataType: 'json',
-            url: '/api/',
-            headers: {
-                "Authorization": "Bearer "+localStorage.getItem('token')
+                    "</tr>"
             }
-        }).done(function (lots) {
-            if (lots.length === 0)
-            {
-                $("#lots").append(
-                    "<tr><td colspan=8 align='center' style='padding: 5px; font-size: 1.4em;'><b>Lots not found</b></td></tr>"
-                );
-                return;
-            }
-            $.each(lots, function (i, lot) {
-                $("#lots").append(
-                    getLot(lot.id, lot.user, lot.title, lot.price.price, lot.step, lot.blitz, lot.status)
-                );
-            })
-        });
 
-        $(document).ready(function(){
+            $.ajax({
+                dataType: 'json',
+                url: '/api/',
+                headers: {
+                    "Authorization": "Bearer "+localStorage.getItem('token')
+                }
+            }).done(function (lots) {
+                if (lots.length === 0)
+                {
+                    $("#lots").append(
+                        "<tr><td colspan=8 align='center' style='padding: 5px; font-size: 1.4em;'><b>Lots not found</b></td></tr>"
+                    );
+                    return;
+                }
+                $.each(lots, function (i, lot) {
+                    $("#lots").append(
+                        getLot(lot.id, lot.user, lot.title, lot.price.price, lot.step, lot.blitz, lot.status)
+                    );
+                })
+            });
+
             $("#search-btn").on('click', function(e){
                 $.ajax({
                     dataType: 'json',
@@ -85,16 +85,9 @@
                     },
                     data: $('#search').serialize()
                 }).done(function (lots) {
-                    $("#lots").html("<tr>\n" +
-                        "                        <th>ID</th>\n" +
-                        "                        <th>Title</th>\n" +
-                        "                        <th>User</th>\n" +
-                        "                        <th>Price</th>\n" +
-                        "                        <th>Step</th>\n" +
-                        "                        <th>Blitz</th>\n" +
-                        "                        <th>Status</th>\n" +
-                        "                        <th></th>\n" +
-                        "                    </tr>");
+                    for (var i = document.getElementById('lots').getElementsByTagName('tr').length-1; i; i--) {
+                        document.getElementById('lots').deleteRow(i);
+                    }
                     if (lots.length === 0)
                     {
                         $("#lots").append(

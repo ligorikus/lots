@@ -96,6 +96,6 @@ class LotsController extends Controller
 
     public function search(Request $request)
     {
-        return $this->lotRepository->getLot()->search($request->search)->get();
+        return $this->lotRepository->getLot()->search($request->search)->get()->load('price', 'user');
     }
 }
