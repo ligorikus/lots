@@ -24,6 +24,7 @@
                 </div>
                 <div class="col-md-2">
                     <h6><span id="logout"></span></h6>
+                    @yield('header')
                 </div>
             </div>
         </div>

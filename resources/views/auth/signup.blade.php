@@ -28,6 +28,10 @@
     </div>
 @endsection
 
+@section('header')
+    <h4><a href='/signin'>Sign In</a></h4>
+@endsection
+
 @section('script')
     <script>
         $(document).ready(function(){

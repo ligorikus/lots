@@ -8,6 +8,7 @@ use App\Models\Lot;
 use App\Models\User;
 use App\Repositories\LotRepository;
 use App\Repositories\UserRepository;
+use Illuminate\Http\Request;
 
 class LotsController extends Controller
 {
@@ -90,5 +91,11 @@ class LotsController extends Controller
         $lot->update($data);
 
         return response()->json(['success'=>true]);
+    }
+
+
+    public function search(Request $request)
+    {
+        return $this->lotRepository->getLot()->search($request->search)->get();
     }
 }

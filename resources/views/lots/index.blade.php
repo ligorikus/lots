@@ -6,7 +6,10 @@
     <div class="row">
         <div class="col-md-12">
             <div class="row">
-                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                    <input class="" id="search" type="text" name="search" placeholder="Search: "/>
+                    <button id="search-btn" class="btn btn-default" type="button">Search!</button>
+                </div>
                 <div class="col-md-4"></div>
                 <div class="col-md-2">
                     <a href="lots/create"><div class="btn btn-success" style="margin: 5px">Create lot</div></a>
@@ -61,7 +64,7 @@
             if (lots.length === 0)
             {
                 $("#lots").append(
-                    "<td colspan=8 align='center' style='padding: 5px; font-size: 1.4em;'><b>Lots not found</b></td>"
+                    "<tr><td colspan=8 align='center' style='padding: 5px; font-size: 1.4em;'><b>Lots not found</b></td></tr>"
                 );
                 return;
             }
@@ -70,6 +73,43 @@
                     getLot(lot.id, lot.user, lot.title, lot.price.price, lot.step, lot.blitz, lot.status)
                 );
             })
+        });
+
+        $(document).ready(function(){
+            $("#search-btn").on('click', function(e){
+                $.ajax({
+                    dataType: 'json',
+                    url: '/api/lots/search',
+                    headers: {
+                        "Authorization": "Bearer "+localStorage.getItem('token')
+                    },
+                    data: $('#search').serialize()
+                }).done(function (lots) {
+                    $("#lots").html("<tr>\n" +
+                        "                        <th>ID</th>\n" +
+                        "                        <th>Title</th>\n" +
+                        "                        <th>User</th>\n" +
+                        "                        <th>Price</th>\n" +
+                        "                        <th>Step</th>\n" +
+                        "                        <th>Blitz</th>\n" +
+                        "                        <th>Status</th>\n" +
+                        "                        <th></th>\n" +
+                        "                    </tr>");
+                    if (lots.length === 0)
+                    {
+                        $("#lots").append(
+                            "<tr><td colspan=8 align='center' style='padding: 5px; font-size: 1.4em;'><b>Lots not found</b></td></tr>"
+                        );
+                        return;
+                    }
+                    $.each(lots, function (i, lot) {
+                        $("#lots").append(
+                            getLot(lot.id, lot.user, lot.title, lot.price.price, lot.step, lot.blitz, lot.status)
+                        );
+                    })
+                });
+
+            });
         });
     </script>
 @endsection
